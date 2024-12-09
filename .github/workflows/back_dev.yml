@@ -1,0 +1,56 @@
+name : BACK_DEV_DEPLOY
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  SSH:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+
+      - uses: actions/checkout@v2
+      - name: Stop server
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.DEV_SSH_KEY }}
+          host: ${{ secrets.BACK_DEV_HOST }}
+          username: ${{ secrets.USER }}
+          script: |
+            cd ktb-BootcampChat-main
+            
+            echo "$PM2_BACKEND_NAME" 중지 중..."
+            pm2 stop "$PM2_BACKEND_NAME"
+            pm2 delete "$PM2_BACKEND_NAME"
+
+      - name: git clone
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_IP}}
+          username: ${{ secrets.REMOTE_SSH_ID}}
+          key: ${{ secrets.REMOTE_SSH_KEY}}
+
+          script: |
+            whoami
+            cd ktb-BootcampChat-main
+            git reset --hard
+            git fetch
+            git pull
+            
+      - name: Server runs on BackGround
+        uses: appleboy/ssh-actions@master
+        with:
+          host: ${{ secrets.REMOTE_IP}}
+          username: ${{ secrets.REMOTE_SSH_ID}}
+          key: ${{ secrets.REMOTE_SSH_KEY}}
+          script: |
+            echo "백엔드 서버를 시작합니다... (모드: $MODE)"
+            cd "$BACKEND_DIR"
+            NODE_ENV=$MODE pm2 start server.js --name "$PM2_BACKEND_NAME" \
+              --log "$LOG_DIR/backend.log" \
+              --error "$LOG_DIR/backend-error.log"
+            cd ..
+      - name:
