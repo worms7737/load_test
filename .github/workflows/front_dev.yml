@@ -1,4 +1,4 @@
-name : BACK_DEV_DEPLOY
+name : FRONT_DEV_DEPLOY
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.DEV_SSH_KEY }}
-          host: ${{ secrets.BACK_DEV_HOST }}
+          host: ${{ secrets.FRONT_DEV_HOST }}
           username: ${{ secrets.USER }}
           script: |
             cd bootcampchat
@@ -29,7 +29,7 @@ jobs:
       - name: git clone
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.BACK_DEV_HOST}}
+          host: ${{ secrets.FRONT_DEV_HOST}}
           username: ${{ secrets.USER}}
           key: ${{ secrets.DEV_SSH_KEY}}
 
@@ -49,9 +49,9 @@ jobs:
           script: |
             echo "백엔드 서버를 시작합니다... (모드: $MODE)"
             cd 
-            cd bootcampchat/backend
-            NODE_ENV=$MODE pm2 start server.js --name "backend-server" \
-              --log "./logs/backend.log" \
-              --error "./logs/backend-error.log"
+            cd bootcampchat/frontend
+            NODE_ENV=$MODE pm2 start --name frontend-server start npm --start \
+              --log "./logs/frontend.log" \
+              --error "./logs/frontend-error.log"
             cd ..
 
