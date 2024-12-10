@@ -41,7 +41,7 @@ jobs:
             git pull
             
       - name: Server runs on BackGround
-        uses: appleboy/ssh-actions@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_IP}}
           username: ${{ secrets.REMOTE_SSH_ID}}
