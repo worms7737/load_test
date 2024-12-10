@@ -16,9 +16,9 @@ jobs:
       - name: Stop server
         uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.DEV_SSH_KEY }}
-          host: ${{ secrets.BACK_DEV_HOST }}
-          username: ${{ secrets.USER }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
           script: |
             cd bootcampchat
             
