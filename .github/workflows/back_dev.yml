@@ -22,7 +22,7 @@ jobs:
           script: |
             cd bootcampchat
             
-            echo "backend-sever" 중지 중..."
+            echo "backend-sever 중지 중..."
             pm2 stop backend-server
             pm2 delete backend-server
 
