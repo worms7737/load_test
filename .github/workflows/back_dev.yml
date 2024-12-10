@@ -35,7 +35,7 @@ jobs:
 
           script: |
             whoami
-            cd ktb-BootcampChat-main
+            cd bootcampchat
             git reset --hard
             git fetch
             git pull
