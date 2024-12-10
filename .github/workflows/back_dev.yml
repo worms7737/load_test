@@ -51,7 +51,7 @@ jobs:
             cd 
             cd bootcampchat/backend
             NODE_ENV=$MODE pm2 start server.js --name "backend-server" \
-              --log "$LOG_DIR/backend.log" \
-              --error "$LOG_DIR/backend-error.log"
+              --log "./logs/backend.log" \
+              --error "./logs/backend-error.log"
             cd ..
 
