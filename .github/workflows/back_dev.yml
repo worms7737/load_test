@@ -3,7 +3,7 @@ name : BACK_DEV_DEPLOY
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   SSH:
     runs-on: ubuntu-latest
