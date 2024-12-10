@@ -48,8 +48,9 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY}}
           script: |
             echo "백엔드 서버를 시작합니다... (모드: $MODE)"
-            cd "$BACKEND_DIR"
-            NODE_ENV=$MODE pm2 start server.js --name "$PM2_BACKEND_NAME" \
+            cd 
+            cd bootcampchat/backend
+            NODE_ENV=$MODE pm2 start server.js --name "backend-server" \
               --log "$LOG_DIR/backend.log" \
               --error "$LOG_DIR/backend-error.log"
             cd ..
