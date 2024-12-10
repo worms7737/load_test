@@ -23,8 +23,8 @@ jobs:
             cd bootcampchat
             
             echo "backend-sever 중지 중..."
-            pm2 stop backend-server
-            pm2 delete backend-server
+            pm2 stop frontend-server
+            pm2 delete frontend-server
 
       - name: git clone
         uses: appleboy/ssh-action@master
@@ -43,11 +43,11 @@ jobs:
       - name: Server runs on BackGround
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.BACK_DEV_HOST}}
+          host: ${{ secrets.FRONT_DEV_HOST}}
           username: ${{ secrets.USER}}
           key: ${{ secrets.DEV_SSH_KEY}}
           script: |
-            echo "백엔드 서버를 시작합니다... (모드: $MODE)"
+            echo "프론트 서버를 시작합니다... (모드: $MODE)"
             cd 
             cd bootcampchat/frontend
             NODE_ENV=$MODE pm2 start --name frontend-server start npm --start \
