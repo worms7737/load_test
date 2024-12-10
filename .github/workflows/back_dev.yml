@@ -20,11 +20,11 @@ jobs:
           host: ${{ secrets.BACK_DEV_HOST }}
           username: ${{ secrets.USER }}
           script: |
-            cd ktb-BootcampChat-main
+            cd bootcampchat
             
-            echo "$PM2_BACKEND_NAME" 중지 중..."
-            pm2 stop "$PM2_BACKEND_NAME"
-            pm2 delete "$PM2_BACKEND_NAME"
+            echo "backend-sever" 중지 중..."
+            pm2 stop backend-server
+            pm2 delete backend-server
 
       - name: git clone
         uses: appleboy/ssh-action@master
