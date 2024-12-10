@@ -50,7 +50,7 @@ jobs:
             echo "프론트 서버를 시작합니다... (모드: $MODE)"
             cd 
             cd bootcampchat/frontend
-            NODE_ENV=$MODE pm2 start --name frontend-server start npm --start \
+            NODE_ENV=$MODE pm2 start --name frontend-server npm start \
               --log "./logs/frontend.log" \
               --error "./logs/frontend-error.log"
             cd ..
